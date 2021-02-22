@@ -35,7 +35,7 @@ public class Main {
 //		Now, who drinks water? Who owns the zebra?
 				
 		String[] colors = {"Red", "Green", "Ivory", "Yellow", "Blue"};
-		String[] nations = {"Englishman", "Spaniard", "Norwegian", "Ukrainian", "Japanese"};
+		String[] nations = {"Englishman", "Spaniard", "Norwegian", "Ukranian", "Japanese"};
 		String[] cigarettes = {"Old Gold", "Kools", "Chesterfields", "Lucky Strike", "Parliaments"};
 		String[] drink = {"Water", "Orange juice", "Tea", "Coffee", "Milk"};
 		String[] pet = {"Zebra", "Dog", "Fox", "Snails", "Horse"};
@@ -159,8 +159,17 @@ public class Main {
 
 		// Domain d2 = new Domain(new Integer[]{1, 2});
 		// csp.setDomain(var2, d2);
-		
-		// TODO add constraints, e.g.,
+
+		csp.addConstraint(new NotEqualConstraint(englishMan, spaniard));
+		csp.addConstraint(new NotEqualConstraint(dog, zebra));
+		csp.addConstraint(new NotEqualConstraint(zebra, fox));
+		csp.addConstraint(new NotEqualConstraint(zebra, snails));
+		csp.addConstraint(new NotEqualConstraint(zebra, horse));
+
+		csp.addConstraint(new NotEqualConstraint(norwegian, englishMan));
+		csp.addConstraint(new NotEqualConstraint(norwegian, spaniard));
+		csp.addConstraint(new NotEqualConstraint(norwegian, ukranian));
+		csp.addConstraint(new NotEqualConstraint(norwegian, japanese));
 
 		csp.addConstraint(new SuccessorConstraint(englishMan, red)); //englishman in red house
 
@@ -201,7 +210,8 @@ public class Main {
 	private static void printSolution(Assignment solution) {
 		// TODO print out useful answer
 		// You can use the following to get the value assigned to a variable:
-		// Object value = solution.getAssignment(var); 
+		// Object value = solution.getAssignment(englishMan);
+
 		// For debugging it might be useful to print the complete assignment and check whether
 		// it makes sense.
 		System.out.println("solution:" + solution);
