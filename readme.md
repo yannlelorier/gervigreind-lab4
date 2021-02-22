@@ -41,10 +41,6 @@ $$
 
 ### 2. Size of the State Space
 
-
-
 ### 3. Implementation
-
-
 
 ### 4. Results Comparison

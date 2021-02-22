@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ArrayList;
 
 import aima.core.search.csp.Assignment;
 import aima.core.search.csp.CSP;
@@ -47,7 +48,7 @@ public class Main {
 		Variable leftNeighbor = new Variable("neighbor1");
 		Variable rightNeighbor = new Variable("neighbor2");
 		
-		List<Variable> variables = null;
+		List<Variable> variables = new ArrayList<>();
 
 		variables.add(nationality);
 		variables.add(houseColor);
@@ -61,46 +62,55 @@ public class Main {
 
 		// TODO set domains of variables, e.g.,
 		// Domain d1 = new Domain(new String[]{"foo", "bar"});
-		Domain dNat = new Domain(nations);
-		csp.setDomain(nationality, dNat);
+
+		Integer[] houseIndexes = new Integer[]{0, 1, 2, 3, 4};
+		Domain domain = new Domain(houseIndexes);
+
+		csp.setDomain(nationality, domain);
 		
-		Domain dCol = new Domain(colors);
-		csp.setDomain(houseColor, dCol);
+		csp.setDomain(houseColor, domain);
 
-		Domain dPet = new Domain(pet);
-		csp.setDomain(hasPet, dPet);
+		csp.setDomain(hasPet, domain);
 
-		Domain dSmok = new Domain(cigarettes);
-		csp.setDomain(smokes, dSmok);
+		csp.setDomain(smokes, domain);
 
-		Domain dDrin = new Domain(drink);
-		csp.setDomain(drinks, dDrin);
+		csp.setDomain(drinks, domain);
 
-		Domain dLNei = new Domain(nations);
-		csp.setDomain(leftNeighbor, dLNei);
+		csp.setDomain(leftNeighbor, domain);
 
-		Domain dRNei = new Domain(nations);
-		csp.setDomain(leftNeighbor, dRNei);
+		csp.setDomain(leftNeighbor, domain);
 
-		
 		// Domain d2 = new Domain(new Integer[]{1, 2});
 		// csp.setDomain(var2, d2);
 		
 		// TODO add constraints, e.g.,
 
-		csp.addConstraint(new SuccessorConstraint(houseColor, houseColor)); //ivory/green
 
-		csp.addConstraint(new EqualConstraint(nationality, hasPet)); //spaniard/dog
 
-		csp.addConstraint(new EqualConstraint(drinks, houseColor)); //coffee in green house
+		// csp.addConstraint(new SuccessorConstraint(houseColor, houseColor)); //ivory/green
 
-		csp.addConstraint(new EqualConstraint(nationality, houseColor)); // english/red House
+		// csp.addConstraint(new EqualConstraint(nationality, hasPet)); //spaniard/dog
 
-		csp.addConstraint(new EqualConstraint(nationality, drinks)); //ukranian/tea
+		// csp.addConstraint(new EqualConstraint(drinks, houseColor)); //coffee in green house
 
-		csp.addConstraint(new EqualConstraint(smokes, houseColor));
+		// csp.addConstraint(new EqualConstraint(nationality, houseColor)); // english/red House
 
-		
+		// csp.addConstraint(new EqualConstraint(nationality, drinks)); //ukranian/tea
+
+		// csp.addConstraint(new EqualConstraint(smokes, houseColor));
+
+		csp.addConstraint(new EqualConstraint(nationality, houseColor)); //eng = red house
+
+		csp.addConstraint(new EqualConstraint(nationality, hasPet)); //spaniard owns red dog
+
+		csp.addConstraint(new EqualConstraint(drinks, houseColor));
+
+		csp.addConstraint(new EqualConstraint(nationality, drinks)); //ukranian drinks tea 
+
+		csp.addConstraint(new SuccessorConstraint(houseColor, houseColor));
+
+		// csp.addConstraint(new );
+
 
 
 
