@@ -301,7 +301,7 @@ public class Main {
 
 		List <Variable> variables = solution.getVariables();
 		Integer thisHouse = 0;
-		for (int i=0; i<4; i++){
+		for (int i=0; i<=4; i++){
 			System.out.println("=======House"+i+"========");
 			for (Variable variable : variables) {
 				Object val = solution.getAssignment(variable);
