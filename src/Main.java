@@ -40,11 +40,11 @@ public class Main {
 		String[] drink = {"Water", "Orange juice", "Tea", "Coffee", "Milk"};
 		String[] pet = {"Zebra", "Dog", "Fox", "Snails", "Horse"};
 
+		Variable house0 = new Variable("house0");
 		Variable house1 = new Variable("house1");
 		Variable house2 = new Variable("house2");
 		Variable house3 = new Variable("house3");
 		Variable house4 = new Variable("house4");
-		Variable house5 = new Variable("house5");
 
 		//// H1 H2 H3 H4 H5
 
@@ -80,11 +80,11 @@ public class Main {
 
 		List<Variable> variables = new ArrayList<>();
 
+		variables.add(house0);
 		variables.add(house1);
 		variables.add(house2);
 		variables.add(house3);
 		variables.add(house4);
-		variables.add(house5);
 
 		variables.add(red);
 		variables.add(green);
@@ -123,11 +123,11 @@ public class Main {
 		Integer[] houseIndexes = new Integer[]{0, 1, 2, 3, 4};
 		Domain domain = new Domain(houseIndexes);
 
+		csp.setDomain(house0, domain);
 		csp.setDomain(house1, domain);
 		csp.setDomain(house2, domain);
 		csp.setDomain(house3, domain);
 		csp.setDomain(house4, domain);
-		csp.setDomain(house5, domain);
 
 		csp.setDomain(red, domain);
 		csp.setDomain(green, domain);
@@ -211,19 +211,13 @@ public class Main {
 		csp.addConstraint(new NotEqualConstraint(horse, snails));
 
 		//no house can be the same
-		csp.addConstraint(new NotEqualConstraint(house1, house2));
-		csp.addConstraint(new NotEqualConstraint(house1, house3));
-		csp.addConstraint(new NotEqualConstraint(house1, house4));
-		csp.addConstraint(new NotEqualConstraint(house1, house5));
+		csp.addConstraint(new SuccessorConstraint(house1, house0));
 
-		csp.addConstraint(new NotEqualConstraint(house2, house3));
-		csp.addConstraint(new NotEqualConstraint(house2, house4));
-		csp.addConstraint(new NotEqualConstraint(house2, house5));
+		csp.addConstraint(new SuccessorConstraint(house2, house1));
 
-		csp.addConstraint(new NotEqualConstraint(house3, house4));
-		csp.addConstraint(new NotEqualConstraint(house3, house5));
+		csp.addConstraint(new SuccessorConstraint(house3, house2));
 
-		csp.addConstraint(new NotEqualConstraint(house4, house5));
+		csp.addConstraint(new SuccessorConstraint(house4, house3));
 
 		//no one smoke the same kind of cigarettes
 		//{"Old Gold", "Kools", "Chesterfields", "Lucky Strike", "Parliaments"};
@@ -268,15 +262,15 @@ public class Main {
 
 		csp.addConstraint(new EqualConstraint(ukranian, tea)); //ukranian drinks tea
 
-		csp.addConstraint(new SuccessorConstraint(ivory, green)); //green to the right of ivory
+		csp.addConstraint(new SuccessorConstraint(green, ivory)); //green to the right of ivory
 
 		csp.addConstraint(new EqualConstraint(oldGolds, snails)); //the guy who smokes old golds has snails
 
 		csp.addConstraint(new EqualConstraint(kools, yellow)); //kools smoked in the yellow house
 
-		csp.addConstraint(new EqualConstraint(milk, house3)); // milk drunk in middle house
+		csp.addConstraint(new EqualConstraint(milk, house2)); // milk drunk in middle house
 
-		csp.addConstraint(new EqualConstraint(norwegian, house1)); //norwegian in first house
+		csp.addConstraint(new EqualConstraint(norwegian, house0)); //norwegian in first house
 
 		csp.addConstraint(new DifferByOneConstraint(chesterfields, fox)); //the guy who smokes chestefields lives next to the guy w the fox
 
@@ -307,12 +301,8 @@ public class Main {
 			for (Variable variable : variables) {
 				Object val = solution.getAssignment(variable);
 				if (val == thisHouse) {
-					// if (variable.getName().matches("[\d]")) {
-					// 	System.out.println("house Index" + val);
-					// }
-					// else {
-					System.out.println(variable.getName());
-					// }
+					System.out.println(variable.getName() + " | House index = " + val);
+
 				}
 			}
 			thisHouse++;
@@ -368,7 +358,6 @@ public class Main {
 		findSolution("backtracking + forward checking + most constrained variable + least constraining value", true, true, false, true);
 		findSolution("backtracking + forward checking + most constrained variable", true, true, false, false);
 		findSolution("backtracking + forward checking", false, false, false, false);
-		// findSolution(description, enableMRV, enableDeg, enableAC3, enableLCV);
 	}
 
 }
