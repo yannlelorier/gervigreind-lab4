@@ -160,18 +160,105 @@ public class Main {
 		// Domain d2 = new Domain(new Integer[]{1, 2});
 		// csp.setDomain(var2, d2);
 
+		//Constraints to get a single solution
+
+		//no house can be the same color
+		// {"Red", "Green", "Ivory", "Yellow", "Blue"}
+		csp.addConstraint(new NotEqualConstraint(red, green));
+		csp.addConstraint(new NotEqualConstraint(red, ivory));
+		csp.addConstraint(new NotEqualConstraint(red, yellow));
+		csp.addConstraint(new NotEqualConstraint(red, blue));
+
+		csp.addConstraint(new NotEqualConstraint(green, ivory));
+		csp.addConstraint(new NotEqualConstraint(green, yellow));
+		csp.addConstraint(new NotEqualConstraint(green, blue));
+
+		csp.addConstraint(new NotEqualConstraint(ivory, yellow));
+		csp.addConstraint(new NotEqualConstraint(ivory, blue));
+
+		csp.addConstraint(new NotEqualConstraint(yellow, blue));		
+
+		//two people cannot live in the same house
 		csp.addConstraint(new NotEqualConstraint(englishMan, spaniard));
+		csp.addConstraint(new NotEqualConstraint(englishMan, norwegian));
+		csp.addConstraint(new NotEqualConstraint(englishMan, ukranian));
+		csp.addConstraint(new NotEqualConstraint(englishMan, japanese));
+
+		csp.addConstraint(new NotEqualConstraint(spaniard, norwegian));
+		csp.addConstraint(new NotEqualConstraint(spaniard, ukranian));
+		csp.addConstraint(new NotEqualConstraint(spaniard, japanese));
+
+		csp.addConstraint(new NotEqualConstraint(ukranian, japanese));
+		csp.addConstraint(new NotEqualConstraint(ukranian, norwegian));
+
+		csp.addConstraint(new NotEqualConstraint(japanese, norwegian));
+
+		//no pet is in the same house
 		csp.addConstraint(new NotEqualConstraint(dog, zebra));
+		csp.addConstraint(new NotEqualConstraint(dog, fox));
+		csp.addConstraint(new NotEqualConstraint(dog, snails));
+		csp.addConstraint(new NotEqualConstraint(dog, horse));
+
 		csp.addConstraint(new NotEqualConstraint(zebra, fox));
 		csp.addConstraint(new NotEqualConstraint(zebra, snails));
 		csp.addConstraint(new NotEqualConstraint(zebra, horse));
 
-		csp.addConstraint(new NotEqualConstraint(norwegian, englishMan));
-		csp.addConstraint(new NotEqualConstraint(norwegian, spaniard));
-		csp.addConstraint(new NotEqualConstraint(norwegian, ukranian));
-		csp.addConstraint(new NotEqualConstraint(norwegian, japanese));
+		csp.addConstraint(new NotEqualConstraint(fox, snails));
+		csp.addConstraint(new NotEqualConstraint(fox, horse));
+		
+		csp.addConstraint(new NotEqualConstraint(fox, zebra));
 
-		csp.addConstraint(new SuccessorConstraint(englishMan, red)); //englishman in red house
+		//no house can be the same
+		csp.addConstraint(new NotEqualConstraint(house1, house2));
+		csp.addConstraint(new NotEqualConstraint(house1, house3));
+		csp.addConstraint(new NotEqualConstraint(house1, house4));
+		csp.addConstraint(new NotEqualConstraint(house1, house5));
+
+		csp.addConstraint(new NotEqualConstraint(house2, house3));
+		csp.addConstraint(new NotEqualConstraint(house2, house4));
+		csp.addConstraint(new NotEqualConstraint(house2, house5));
+
+		csp.addConstraint(new NotEqualConstraint(house3, house4));
+		csp.addConstraint(new NotEqualConstraint(house3, house5));
+
+		csp.addConstraint(new NotEqualConstraint(house4, house5));
+
+		//no one smoke the same kind of cigarettes
+		//{"Old Gold", "Kools", "Chesterfields", "Lucky Strike", "Parliaments"};
+		csp.addConstraint(new NotEqualConstraint(oldGolds, kools));
+		csp.addConstraint(new NotEqualConstraint(oldGolds, chesterfields));
+		csp.addConstraint(new NotEqualConstraint(oldGolds, luckyStrike));
+		csp.addConstraint(new NotEqualConstraint(oldGolds, parliaments));
+
+		csp.addConstraint(new NotEqualConstraint(kools, chesterfields));
+		csp.addConstraint(new NotEqualConstraint(kools, luckyStrike));
+		csp.addConstraint(new NotEqualConstraint(kools, parliaments));
+
+		csp.addConstraint(new NotEqualConstraint(luckyStrike, chesterfields));
+		csp.addConstraint(new NotEqualConstraint(luckyStrike, parliaments));
+
+		csp.addConstraint(new NotEqualConstraint(parliaments, kools));
+
+		//no drink can be the same
+		// {"Water", "Orange juice", "Tea", "Coffee", "Milk"};
+		csp.addConstraint(new NotEqualConstraint(water, orangeJuice));
+		csp.addConstraint(new NotEqualConstraint(water, tea));
+		csp.addConstraint(new NotEqualConstraint(water, coffee));
+		csp.addConstraint(new NotEqualConstraint(water, milk));
+
+		csp.addConstraint(new NotEqualConstraint(orangeJuice, tea));
+		csp.addConstraint(new NotEqualConstraint(orangeJuice, coffee));
+		csp.addConstraint(new NotEqualConstraint(orangeJuice, milk));
+
+		csp.addConstraint(new NotEqualConstraint(tea, coffee));
+		csp.addConstraint(new NotEqualConstraint(tea, milk));
+
+		csp.addConstraint(new NotEqualConstraint(coffee, milk));
+
+		
+		//original constraints
+
+		csp.addConstraint(new EqualConstraint(englishMan, red)); //englishman in red house
 
 		csp.addConstraint(new EqualConstraint(spaniard, dog)); //spaniard has a dog
 
@@ -179,25 +266,25 @@ public class Main {
 
 		csp.addConstraint(new EqualConstraint(ukranian, tea)); //ukranian drinks tea
 
-		csp.addConstraint(new SuccessorConstraint(ivory, green));
+		csp.addConstraint(new SuccessorConstraint(ivory, green)); //green to the right of ivory
 
 		csp.addConstraint(new EqualConstraint(oldGolds, snails)); //the guy who smokes old golds has snails
 
 		csp.addConstraint(new EqualConstraint(kools, yellow)); //kools smoked in the yellow house
 
-		csp.addConstraint(new EqualConstraint(milk, house3));
+		csp.addConstraint(new EqualConstraint(milk, house3)); // milk drunk in middle house
 
-		csp.addConstraint(new EqualConstraint(norwegian, house1));
+		csp.addConstraint(new EqualConstraint(norwegian, house1)); //norwegian in first house
 
-		csp.addConstraint(new DifferByOneConstraint(chesterfields, fox));
+		csp.addConstraint(new DifferByOneConstraint(chesterfields, fox)); //the guy who smokes chestefields lives next to the guy w the fox
 
-		csp.addConstraint(new DifferByOneConstraint(kools, horse));
+		csp.addConstraint(new DifferByOneConstraint(kools, horse)); // the guy who smokes kools lives next to the horse guy
 
-		csp.addConstraint(new EqualConstraint(luckyStrike, orangeJuice));
+		csp.addConstraint(new EqualConstraint(luckyStrike, orangeJuice)); // the guy with luckystrike drinks orange juice
 
-		csp.addConstraint(new EqualConstraint(japanese, parliaments));
+		csp.addConstraint(new EqualConstraint(japanese, parliaments)); // the japanese smokes parliaments
 
-		csp.addConstraint(new DifferByOneConstraint(norwegian, blue));
+		csp.addConstraint(new DifferByOneConstraint(norwegian, blue)); // the norwegian lives next to the blue house
 		
 		// csp.addConstraint(new NotEqualConstraint(var1, var2)); // meaning var1 != var2
 		// csp.addConstraint(new EqualConstraint(var1, var2)); // meaning var1 == var2
@@ -212,9 +299,24 @@ public class Main {
 		// You can use the following to get the value assigned to a variable:
 		// Object value = solution.getAssignment(englishMan);
 
+		List <Variable> variables = solution.getVariables();
+		Integer thisHouse = 0;
+		for (int i=0; i<4; i++){
+			System.out.println("=======House"+i+"========");
+			for (Variable variable : variables) {
+				Object val = solution.getAssignment(variable);
+				if (val == thisHouse) {
+					System.out.println(variable.getName());
+				}
+			}
+			thisHouse++;
+		}
+
+		// System.out.println(value);
+
 		// For debugging it might be useful to print the complete assignment and check whether
 		// it makes sense.
-		System.out.println("solution:" + solution);
+		// System.out.println("solution:" + solution);
 	}
 	
 	/**
