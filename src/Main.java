@@ -46,6 +46,8 @@ public class Main {
 		Variable house4 = new Variable("house4");
 		Variable house5 = new Variable("house5");
 
+		//// H1 H2 H3 H4 H5
+
 		Variable englishMan = new Variable(nations[0]);
 		Variable spaniard = new Variable(nations[1]);
 		Variable norwegian = new Variable(nations[2]);
@@ -205,8 +207,8 @@ public class Main {
 
 		csp.addConstraint(new NotEqualConstraint(fox, snails));
 		csp.addConstraint(new NotEqualConstraint(fox, horse));
-		
-		csp.addConstraint(new NotEqualConstraint(fox, zebra));
+
+		csp.addConstraint(new NotEqualConstraint(horse, snails));
 
 		//no house can be the same
 		csp.addConstraint(new NotEqualConstraint(house1, house2));
@@ -237,7 +239,7 @@ public class Main {
 		csp.addConstraint(new NotEqualConstraint(luckyStrike, chesterfields));
 		csp.addConstraint(new NotEqualConstraint(luckyStrike, parliaments));
 
-		csp.addConstraint(new NotEqualConstraint(parliaments, kools));
+		csp.addConstraint(new NotEqualConstraint(parliaments, chesterfields));
 
 		//no drink can be the same
 		// {"Water", "Orange juice", "Tea", "Coffee", "Milk"};
@@ -295,7 +297,6 @@ public class Main {
 	}
 
 	private static void printSolution(Assignment solution) {
-		// TODO print out useful answer
 		// You can use the following to get the value assigned to a variable:
 		// Object value = solution.getAssignment(englishMan);
 
@@ -306,7 +307,12 @@ public class Main {
 			for (Variable variable : variables) {
 				Object val = solution.getAssignment(variable);
 				if (val == thisHouse) {
+					// if (variable.getName().matches("[\d]")) {
+					// 	System.out.println("house Index" + val);
+					// }
+					// else {
 					System.out.println(variable.getName());
+					// }
 				}
 			}
 			thisHouse++;
@@ -362,6 +368,7 @@ public class Main {
 		findSolution("backtracking + forward checking + most constrained variable + least constraining value", true, true, false, true);
 		findSolution("backtracking + forward checking + most constrained variable", true, true, false, false);
 		findSolution("backtracking + forward checking", false, false, false, false);
+		// findSolution(description, enableMRV, enableDeg, enableAC3, enableLCV);
 	}
 
 }

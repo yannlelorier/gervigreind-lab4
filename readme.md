@@ -46,8 +46,134 @@ This means that since all of these variables share the same domain, what we are 
 
 ### 2. Size of the State Space
 
+The size of the state space is given by:
+
+
+
 
 
 ### 3. Implementation
 
 ### 4. Results Comparison
+
+```sh
+======================
+running backtracking + AC3 + most constrained variable + least constraining value
+runtime 0.022s, number of assignments (visited states):32
+=======House0========
+Green
+Coffee
+Japanese
+Parliaments
+Zebra
+house2
+=======House1========
+Ivory
+Tea
+Ukranian
+Horse
+Chesterfields
+house4
+=======House2========
+Kools
+Yellow
+house1
+Norwegian
+Water
+Fox
+=======House3========
+Blue
+Dog
+Spaniard
+Lucky Strike
+Orange juice
+house5
+=======House4========
+Englishman
+Red
+house3
+Snails
+Old Gold
+Milk
+======================
+running backtracking + AC3 + most constrained variable
+runtime 0.003s, number of assignments (visited states):32
+=======House0========
+Green
+Coffee
+Japanese
+Parliaments
+Zebra
+house2
+=======House1========
+Ivory
+Tea
+Ukranian
+Horse
+Chesterfields
+house4
+=======House2========
+Kools
+Yellow
+house1
+Norwegian
+Water
+Fox
+=======House3========
+Blue
+Dog
+Spaniard
+Lucky Strike
+Orange juice
+house5
+=======House4========
+Englishman
+Red
+house3
+Snails
+Old Gold
+Milk
+======================
+running backtracking + AC3
+runtime 0.003s, number of assignments (visited states):34
+=======House0========
+house1
+Yellow
+Norwegian
+Kools
+Water
+Fox
+=======House1========
+house2
+Blue
+Ukranian
+Chesterfields
+Tea
+Horse
+=======House2========
+house3
+Red
+Englishman
+Old Gold
+Milk
+Snails
+=======House3========
+house4
+Green
+Japanese
+Parliaments
+Coffee
+Zebra
+=======House4========
+house5
+Ivory
+Spaniard
+Lucky Strike
+Orange juice
+Dog
+======================
+#... (runs indefinitely - we only waited for 10 minutes or so)
+```
+
+These different results come from the different heuristics that are being used in the call for the 
+
